@@ -1,6 +1,6 @@
-package it.unina.authexample.config;
+package it.unina.authexample.infrastructure.config;
 
-import it.unina.authexample.service.UserDetailsService;
+import it.unina.authexample.domain.service.UserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

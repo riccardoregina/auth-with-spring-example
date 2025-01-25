@@ -1,8 +1,8 @@
-package it.unina.authexample.service;
+package it.unina.authexample.domain.service;
 
-import it.unina.authexample.controller.dto.SignupRequest;
-import it.unina.authexample.model.User;
-import it.unina.authexample.repository.UserRepository;
+import it.unina.authexample.infrastructure.controller.dto.SignupRequest;
+import it.unina.authexample.domain.model.User;
+import it.unina.authexample.infrastructure.repository.InMemUserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final UserRepository repository;
+    private final InMemUserRepository repository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository repository, PasswordEncoder passwordEncoder) {
+    public UserService(InMemUserRepository repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
     }

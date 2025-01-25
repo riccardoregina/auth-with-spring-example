@@ -1,4 +1,4 @@
-package it.unina.authexample.helper;
+package it.unina.authexample.infrastructure.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -11,7 +11,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
-public class JwtHelper {
+public class JwtUtil {
 
   private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
   private static final int MINUTES = 60;
@@ -30,7 +30,7 @@ public class JwtHelper {
     return getTokenBody(token).getSubject();
   }
 
-  public static Boolean validateToken(String token, UserDetails userDetails) {
+  public static Boolean isTokenValid(String token, UserDetails userDetails) {
     final String username = extractUsername(token);
     return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
   }

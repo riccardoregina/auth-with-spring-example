@@ -8,6 +8,7 @@ class AuthExampleApplicationTests {
 
     @Test
     void contextLoads() {
+//      Check if Spring can load the beans correctly
     }
 
 }

@@ -1,4 +1,4 @@
-package it.unina.authexample.controller.dto;
+package it.unina.authexample.infrastructure.controller.dto;
 
 public record SignupRequest(
     String name,

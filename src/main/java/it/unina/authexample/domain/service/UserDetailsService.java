@@ -1,16 +1,16 @@
-package it.unina.authexample.service;
+package it.unina.authexample.domain.service;
 
-import it.unina.authexample.model.User;
-import it.unina.authexample.repository.UserRepository;
+import it.unina.authexample.domain.model.User;
+import it.unina.authexample.infrastructure.repository.InMemUserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
-  private final UserRepository repository;
+  private final InMemUserRepository repository;
 
-  public UserDetailsService(UserRepository repository) {
+  public UserDetailsService(InMemUserRepository repository) {
     this.repository = repository;
   }
 

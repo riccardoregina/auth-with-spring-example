@@ -1,7 +1,7 @@
-package it.unina.authexample.config;
+package it.unina.authexample.infrastructure.config;
 
-import it.unina.authexample.helper.JwtHelper;
-import it.unina.authexample.service.UserDetailsService;
+import it.unina.authexample.infrastructure.util.JwtUtil;
+import it.unina.authexample.domain.service.UserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +15,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * The JWT Auth filter used in Spring Security's filter chain
+ */
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
 
@@ -28,25 +31,25 @@ public class JwtAuthFilter extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
     String authHeader = request.getHeader("Authorization");
-
     String token = null;
     String username = null;
+//  Get, if present, the JWT and the contained username
     if (authHeader != null && authHeader.startsWith("Bearer ")) {
       token = authHeader.substring(7);
-      username = JwtHelper.extractUsername(token);
+      username = JwtUtil.extractUsername(token);
     }
 
-//      If the accessToken is null. It will pass the request to next filter in the chain.
-//      Any login and signup requests will not have jwt token in their header, therefore they will be passed to next filter chain.
+//  If the accessToken is null. It will pass the request to next filter in the chain.
+//  Any login and signup requests will not have jwt token in their header, therefore they will be passed to next filter chain.
     if (token == null) {
       filterChain.doFilter(request, response);
       return;
     }
 
-//       If any accessToken is present, then it will validate the token and then authenticate the request in security context
+//  If any accessToken is present, then it will check if the token is valid and then authenticate the request in security context
     if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-      if (JwtHelper.validateToken(token, userDetails)) {
+      if (JwtUtil.isTokenValid(token, userDetails)) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, null);
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);

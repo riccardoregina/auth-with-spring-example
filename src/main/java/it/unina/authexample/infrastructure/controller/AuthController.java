@@ -1,12 +1,11 @@
 
-package it.unina.authexample.controller;
+package it.unina.authexample.infrastructure.controller;
 
-import it.unina.authexample.controller.dto.LoginRequest;
-import it.unina.authexample.controller.dto.LoginResponse;
-import it.unina.authexample.controller.dto.SignupRequest;
-import it.unina.authexample.controller.dto.TreasureResponse;
-import it.unina.authexample.helper.JwtHelper;
-import it.unina.authexample.service.UserService;
+import it.unina.authexample.infrastructure.controller.dto.LoginRequest;
+import it.unina.authexample.infrastructure.controller.dto.LoginResponse;
+import it.unina.authexample.infrastructure.controller.dto.SignupRequest;
+import it.unina.authexample.infrastructure.util.JwtUtil;
+import it.unina.authexample.domain.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -41,13 +40,8 @@ public class AuthController {
       throw e;
     }
 
-    String token = JwtHelper.generateToken(request.email());
+    String token = JwtUtil.generateToken(request.email());
     return ResponseEntity.ok(new LoginResponse(request.email(), token));
-  }
-
-  @PostMapping(value = "/secret")
-  public ResponseEntity<TreasureResponse> secret() {
-    return ResponseEntity.ok(new TreasureResponse("forza napoli", "Hai avuto accesso al tesoro."));
   }
 
 }

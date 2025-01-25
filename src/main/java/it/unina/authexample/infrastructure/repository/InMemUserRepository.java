@@ -1,6 +1,7 @@
-package it.unina.authexample.repository;
+package it.unina.authexample.infrastructure.repository;
 
-import it.unina.authexample.model.User;
+import it.unina.authexample.domain.model.User;
+import it.unina.authexample.domain.repository.UserRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Repository
-public class UserRepository {
+public class InMemUserRepository implements UserRepository {
     private final Map<String, User> users = new HashMap<>();
 
     public void add(User user) {
