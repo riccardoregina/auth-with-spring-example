@@ -44,6 +44,7 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.POST, "/api/auth/signup/**").permitAll()
             .requestMatchers(HttpMethod.POST, "/api/auth/login/**").permitAll()
 //            our private endpoints
+            .requestMatchers(HttpMethod.GET, "/api/services/secret").hasRole("ADMIN")
             .anyRequest().authenticated())
         .authenticationManager(authenticationManager)
 

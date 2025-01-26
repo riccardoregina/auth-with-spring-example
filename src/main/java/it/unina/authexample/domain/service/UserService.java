@@ -28,7 +28,7 @@ public class UserService {
         }
 
         String hashedPassword = passwordEncoder.encode(request.password());
-        User user = new User(request.name(), email, hashedPassword);
+        User user = new User(request.name(), email, hashedPassword, request.role());
         repository.add(user);
     }
 

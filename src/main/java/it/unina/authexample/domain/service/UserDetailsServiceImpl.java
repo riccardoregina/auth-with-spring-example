@@ -2,7 +2,6 @@ package it.unina.authexample.domain.service;
 
 import it.unina.authexample.domain.model.User;
 import it.unina.authexample.infrastructure.repository.InMemUserRepository;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +23,7 @@ public class UserDetailsServiceImpl implements org.springframework.security.core
     return org.springframework.security.core.userdetails.User.builder()
         .username(user.email())
         .password(user.password())
+        .roles(user.role())
         .build();
   }
 }
