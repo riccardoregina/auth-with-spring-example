@@ -1,6 +1,6 @@
 package it.unina.authexample.infrastructure.config;
 
-import it.unina.authexample.domain.service.UserDetailsService;
+import it.unina.authexample.domain.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,10 +19,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-  private final UserDetailsService userDetailsService;
+  private final UserDetailsServiceImpl userDetailsService;
   private final JwtAuthFilter jwtAuthFilter;
 
-  public SecurityConfig(UserDetailsService userDetailsService, JwtAuthFilter jwtAuthFilter) {
+  public SecurityConfig(UserDetailsServiceImpl userDetailsService, JwtAuthFilter jwtAuthFilter) {
     this.userDetailsService = userDetailsService;
     this.jwtAuthFilter = jwtAuthFilter;
   }
