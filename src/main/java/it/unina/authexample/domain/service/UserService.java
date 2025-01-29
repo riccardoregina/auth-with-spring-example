@@ -1,5 +1,6 @@
 package it.unina.authexample.domain.service;
 
+import it.unina.authexample.domain.repository.UserRepository;
 import it.unina.authexample.infrastructure.controller.dto.SignupRequest;
 import it.unina.authexample.domain.model.User;
 import it.unina.authexample.infrastructure.repository.InMemUserRepository;
@@ -11,7 +12,7 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final InMemUserRepository repository;
+    private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
 
     public UserService(InMemUserRepository repository, PasswordEncoder passwordEncoder) {
